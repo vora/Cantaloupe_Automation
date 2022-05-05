@@ -351,7 +351,7 @@ public class BaseActions extends TestBase {
     public void regexAddress(By element, String streetAddress) {
 
         //String regex = "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)";
-        String regex = "[A-Za-z0-9,]+";
+        String regex = "[\\w,.!?]";
         WebElement webElement = driver.findElement(element);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(streetAddress);
@@ -635,7 +635,10 @@ public class BaseActions extends TestBase {
         Boolean checkPatternCondition = matcher.matches();
 
         if (checkPatternCondition == true) {
-        } else if ((checkPatternCondition == false)) {
+
+        }
+        else if (checkPatternCondition == false)
+        {
             Assert.assertTrue(false, "The entered data is not valid");
         } else {
             log.info("Create Account Screen : Something is not proper for the entered phone number ");
@@ -816,6 +819,21 @@ public class BaseActions extends TestBase {
     public void enterData(By element, String dataToBeEntered)
     {
         driver.findElement(element).sendKeys(dataToBeEntered);
+    }
+
+    //Blank fields validations
+    public void verifyBlankFields(By elementInput, By elementError) throws AWTException {
+        driver.findElement(elementInput).click();
+        randomClickBasedOnOS();
+        driver.findElement(elementError).isDisplayed();
+    }
+
+    //getAttribute
+    public String getElementAttribute(By element)
+    {
+        WebElement emailInput = driver.findElement(element);
+        String inputAttribute = emailInput.getAttribute("value");
+        return inputAttribute;
     }
 
 }

@@ -55,7 +55,6 @@ public class AccountCreation extends TestBase {
         driver.findElement(accountCreationLocators.nextButton).click();
         WebElement emailText = driver.findElement(accountCreationLocators.emailIdInputField);
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        // String getEmailText = (String) js.executeScript("return arguments[0].value", emailText);
         if (createNewEmail.equalsIgnoreCase(emailInputAttribute)) {
             Assert.assertTrue(true, "User is on the right page");
             System.out.println("User is on the right page");
@@ -66,80 +65,32 @@ public class AccountCreation extends TestBase {
 
     //Validates all the input fields on the account creation screen
     public void validateInptBlankFieldsErrorMsg() throws AWTException {
-        WebElement emailInputbox = driver.findElement(accountCreationLocators.emailIdInputField);
-        driver.findElement(accountCreationLocators.createPasswordInputField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.passwordCriteriaText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.confirmPasswordInptField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.passwordNotAMatchText).isDisplayed();
-        String emailPlaceHolder = emailInputbox.getAttribute("placeholder");
-
-        driver.findElement(accountCreationLocators.firstName).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.enterFirstNameErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.lastName).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.enterLastNameErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.mobileNumberField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.enterMobileNumberErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.streetAddressInputField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.streetAddressErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.cityInputField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.cityErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.stateInptField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.stateErrorText).isDisplayed();
-
-        driver.findElement(accountCreationLocators.zipcodeInputField).click();
-        baseActions.randomClickBasedOnOS();
-        driver.findElement(accountCreationLocators.zipcodeErrorText).isDisplayed();
+        baseActions.verifyBlankFields(accountCreationLocators.createPasswordInputField, accountCreationLocators.passwordCriteriaText);
+        baseActions.verifyBlankFields(accountCreationLocators.confirmPasswordInptField, accountCreationLocators.passwordNotAMatchText );
+        baseActions.verifyBlankFields(accountCreationLocators.firstName, accountCreationLocators.enterFirstNameErrorText );
+        baseActions.verifyBlankFields(accountCreationLocators.lastName, accountCreationLocators.enterLastNameErrorText );
+        baseActions.verifyBlankFields(accountCreationLocators.mobileNumberField, accountCreationLocators.enterMobileNumberErrorText);
+        baseActions.verifyBlankFields(accountCreationLocators.streetAddressInputField, accountCreationLocators.streetAddressErrorText);
+        baseActions.verifyBlankFields(accountCreationLocators.cityInputField, accountCreationLocators.cityErrorText);
+        baseActions.verifyBlankFields(accountCreationLocators.stateInptField, accountCreationLocators.stateErrorText);
+        baseActions.verifyBlankFields(accountCreationLocators.zipcodeInputField, accountCreationLocators.zipcodeErrorText);
     }
 
     //Verify that the complete button is enabled after all the fields have data
     public void verifyCompleteButtonEnablement() {
-        WebElement emailInput = driver.findElement(accountCreationLocators.emailIdInputField);
-        String emailInputAttribute = emailInput.getAttribute("value");
-
-
-        WebElement createPassword = driver.findElement(accountCreationLocators.createPasswordInputField);
-        String createPasswordAttribute = createPassword.getAttribute("value");
-
-        WebElement confirmPassword = driver.findElement(accountCreationLocators.confirmPasswordInptField);
-        String confirmPasswordAttribute = confirmPassword.getAttribute("value");
-
-        WebElement firstNameInput = driver.findElement(accountCreationLocators.firstName);
-        String firstNameInputAttribute = firstNameInput.getAttribute("value");
-
-        WebElement lastNameInput = driver.findElement(accountCreationLocators.lastName);
-        String lastNameInputAttribute = lastNameInput.getAttribute("value");
-
-        WebElement mobileInput = driver.findElement(accountCreationLocators.mobileNumberField);
-        String mobileInputAttribute = mobileInput.getAttribute("value");
-
-        WebElement streetInput = driver.findElement(accountCreationLocators.streetAddressInputField);
-        String streetInputAttribute = streetInput.getAttribute("value");
-
-        WebElement cityInput = driver.findElement(accountCreationLocators.cityInputField);
-        String cityInputAttribute = cityInput.getAttribute("value");
-
-        WebElement stateInput = driver.findElement(accountCreationLocators.stateInptField);
-        String stateInputAttribute = stateInput.getAttribute("value");
-
-        WebElement zipcodeInput = driver.findElement(accountCreationLocators.zipcodeInputField);
-        String zipcodeInputAttribute = zipcodeInput.getAttribute("value");
+        String emailInputAttribute = baseActions.getElementAttribute(accountCreationLocators.emailIdInputField);
+        String createPasswordAttribute = baseActions.getElementAttribute(accountCreationLocators.createPasswordInputField);
+        String confirmPasswordAttribute = baseActions.getElementAttribute(accountCreationLocators.confirmPasswordInptField);
+        String firstNameInputAttribute =  baseActions.getElementAttribute(accountCreationLocators.firstName);
+        String lastNameInputAttribute =  baseActions.getElementAttribute(accountCreationLocators.lastName);
+        String mobileInputAttribute  = baseActions.getElementAttribute(accountCreationLocators.mobileNumberField);
+        String streetInputAttribute = baseActions.getElementAttribute(accountCreationLocators.streetAddressInputField);
+        String cityInputAttribute =  baseActions.getElementAttribute(accountCreationLocators.cityInputField);
+        String stateInputAttribute = baseActions.getElementAttribute(accountCreationLocators.stateInptField);
+        String zipcodeInputAttribute = baseActions.getElementAttribute(accountCreationLocators.zipcodeInputField);
 
         if ((emailInputAttribute.equalsIgnoreCase(properties.getProperty("createNewEmail"))) && (createPasswordAttribute.isEmpty()) && (confirmPasswordAttribute.isEmpty()) && (firstNameInputAttribute.isEmpty()
-                && (lastNameInputAttribute.isEmpty()) && (mobileInputAttribute.isEmpty()) && (stateInputAttribute.isEmpty()) && (cityInputAttribute.isEmpty()
+                && (lastNameInputAttribute.isEmpty()) && (mobileInputAttribute.isEmpty()) && (streetInputAttribute.isEmpty()) && (stateInputAttribute.isEmpty()) && (cityInputAttribute.isEmpty()
                 && (stateInputAttribute.isEmpty() && (zipcodeInputAttribute.isEmpty()))))) {
             Assert.assertTrue(driver.findElement(accountCreationLocators.completeButton).isEnabled()==false, "Complete button should not be enabled");
             // Assert.assertTrue(true, "Complete button should not be enabled");
@@ -148,31 +99,6 @@ public class AccountCreation extends TestBase {
         } else {
             Assert.assertFalse(false, "Complete button should be enabled");
         }
-    }
-
-    //Enter data in all the fields
-    public void accountCreationProcess(String createAccountPassword, String createAccountConfirmPassword,
-                                       String firstName, String lastName, String mobileNumber, String streetAddress, String city, String state, String zipcode) throws IOException {
-        {
-            driver.findElement(accountCreationLocators.createPasswordInputField).sendKeys(createAccountPassword);
-            driver.findElement(accountCreationLocators.confirmPasswordInptField).sendKeys(createAccountConfirmPassword);
-            driver.findElement(accountCreationLocators.firstName).sendKeys(firstName);
-            driver.findElement(accountCreationLocators.lastName).sendKeys(lastName);
-            driver.findElement(accountCreationLocators.mobileNumberField).sendKeys(verifyMobileInputfield(mobileNumber));
-
-            driver.findElement(accountCreationLocators.streetAddressInputField).sendKeys(streetAddress);
-            driver.findElement(accountCreationLocators.cityInputField).sendKeys(city);
-            driver.findElement(accountCreationLocators.stateInptField).sendKeys(state);
-            driver.findElement(accountCreationLocators.zipcodeInputField).sendKeys(zipcode);
-        }
-
-    }
-
-    //validate mobileField only accepts 10 digits - Regex(@"^[0-9]{10}$");
-    public String verifyMobileInputfield(String mobileNo) {
-        Pattern mobileNoPattern = Pattern.compile("^\\d{10}$");
-        mobileNoPattern.matcher(mobileNo);
-        return mobileNo;
     }
 
 
@@ -494,7 +420,6 @@ public class AccountCreation extends TestBase {
     //Verify Errors For Phone Number Input Field
     public void verifyMobileInput(String validMobileNumber, String invalidMobilbeNumber) throws AWTException {
         driver.findElement(accountCreationLocators.phoneNoInput);
-       // driver.findElement(accountCreationLocators.phoneNoInput).sendKeys(invalidMobilbeNumber);
         baseActions.randomClickBasedOnOS();
         baseActions.validateErrorMessages(accountCreationLocators.invalidMobileError);
         baseActions.clearInputfieldAndEnterNewData((accountCreationLocators.phoneNoInput), validMobileNumber);
@@ -518,7 +443,8 @@ public class AccountCreation extends TestBase {
         driver.findElement(accountCreationLocators.streetAddressInput).sendKeys("");
         baseActions.randomClickBasedOnOS();
         baseActions.validateErrorMessages(accountCreationLocators.blankStreetError);
-        baseActions.regexAddress(accountCreationLocators.streetAddressInput, streetAddress);
+       // baseActions.regexAddress(accountCreationLocators.streetAddressInput, streetAddress);
+        baseActions.enterData(accountCreationLocators.streetAddressInputField, streetAddress);
 
         driver.findElement(accountCreationLocators.cityInput).sendKeys("");
         baseActions.randomClickBasedOnOS();
@@ -528,12 +454,10 @@ public class AccountCreation extends TestBase {
         driver.findElement(accountCreationLocators.stateInput).sendKeys("");
         baseActions.randomClickBasedOnOS();
         baseActions.validateErrorMessages(accountCreationLocators.blankStateError);
-//        baseActions.regexState(accountCreationLocators.stateInput, state);
 
         driver.findElement(accountCreationLocators.zipcodeInput).sendKeys("");
         baseActions.randomClickBasedOnOS();
         baseActions.validateErrorMessages(accountCreationLocators.blankZipcodeError);
-//        baseActions.regexZipcode(accountCreationLocators.zipcodeInput, zipcode);
         regexCompleteAddress(properties.getProperty("streetAddress"), properties.getProperty("regexFinalAddress"));
     }
 
@@ -1055,8 +979,8 @@ public class AccountCreation extends TestBase {
 
 
     //wrongScenarios - zipcode
-    public void verifyWrongZipcodeError() throws AWTException {
-        baseActions.validateWrongScenarios(accountCreationLocators.zipcodeInput, accountCreationLocators.zipcodeErrorText, properties.getProperty("wrongZipcode"));
+    public void verifyWrongZipcodeError(String wrongZipcode) throws AWTException {
+        baseActions.validateWrongScenarios(accountCreationLocators.zipcodeInput, accountCreationLocators.zipcodeErrorText, wrongZipcode);
     }
 
     public void validateAllErrors() throws AWTException {

@@ -242,7 +242,7 @@ public class AccountCreationTest extends TestBase {
         accountCreation.clickCreateButton();
         accountCreation.validateEmailCriteria(properties.getProperty("createNewEmail"));
         accountCreation.verifyNextButtonEnabled();
-        baseActions.enterData(accountCreationLocators.phoneNoInput, properties.getProperty("mobileNumber"));
+        baseActions.enterData(accountCreationLocators.phoneNoInput, properties.getProperty("newPhoneNo"));
         accountCreation.regexPhoneNo(properties.getProperty("newPhoneNo"));
         accountCreation.verifyPhoneNoFormat();
         accountCreation.verifyIfMobileNoISNew();
@@ -253,7 +253,7 @@ public class AccountCreationTest extends TestBase {
         accountCreation.clickCreateButton();
         accountCreation.validateEmailCriteria(properties.getProperty("createNewEmail"));
         accountCreation.verifyNextButtonEnabled();
-        baseActions.enterData(accountCreationLocators.phoneNoInput, properties.getProperty("mobileNumber"));
+        baseActions.enterData(accountCreationLocators.phoneNoInput, properties.getProperty("usedPhoneNo"));
         accountCreation.regexPhoneNo(properties.getProperty("usedPhoneNo"));
         accountCreation.verifyPhoneNoFormat();
         accountCreation.verifyIfMobileNoIsUsed();

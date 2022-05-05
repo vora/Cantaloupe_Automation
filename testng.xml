@@ -2,42 +2,13 @@
 
 
 <suite   name="Functional" >
-<!--    <test name="Cantaloupe Android" >-->
-<!--        <parameter name="runAs" value="grid"></parameter>-->
-<!--        <parameter name="platform" value="mobile"></parameter>-->
-<!--        <parameter name="runOn" value="emulator-5554"></parameter>-->
-<!--        <classes>-->
-<!--&lt;!&ndash;            <class name="tests.AccountCreation1Test" />&ndash;&gt;-->
-<!--            <class name="tests.AccountCreation2Test" />-->
-<!--            <class name="tests.SignInWithExistingAccountTest" />-->
-<!--            <class name="tests.ForgotPasswordTest" />-->
-<!--            <class name="tests.HomePageTest"></class>-->
-
-<!--        </classes>-->
-<!--    </test>-->
-
     <listeners>
-<!--        <listener class-name="reports.ExtentReporterNG" />-->
         <listener class-name="ExtentReports.TestListener"></listener>
     </listeners>
 
     <test name="Cantaloupe iOS" >
-        <!--        <parameter name="runAs" value="grid"></parameter>-->
-        <!--        <parameter name="platform" value="mobi``````le"></parameter>-->
-        <!--        <parameter name="runOn" value="iPhone 12 Pro Max"></parameter>-->
         <classes>
-            <class name="tests.AccountCreationTest">
-<!--            <methods>-->
-<!--                <include name="checkInputsBeforeAndAfterNavigations"></include>-->
-<!--            </methods>-->
-        </class>
-            <class name="tests.UpdateProfileTests"></class>
-
-
+            <class name="tests.AccountCreationTest"/>
         </classes>
-
     </test>
 </suite>
-
-
-<!--        name="Functional" thread-count="2" parallel="tests" preserve-order="true" verbose="2"-->
