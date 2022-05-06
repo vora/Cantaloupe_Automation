@@ -1,22 +1,7 @@
 package base;
 
-//import com.aventstack.extentreports.ExtentReports;
-//import com.aventstack.extentreports.ExtentTest;
-//import com.aventstack.extentreports.MediaEntityBuilder;
-//import com.aventstack.extentreports.Status;
-//import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.android.ddmlib.Log;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-//import com.relevantcodes.extentreports.ExtentReports;
-//import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-import com.sun.mail.imap.Utility;
 import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -27,22 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import org.testng.ITestResult;
 import org.testng.annotations.*;
-import resources.FinalConstants;
-
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+
 
 public class TestBase {
 
@@ -54,10 +33,10 @@ public class TestBase {
      public static ExtentTest extentTest;
 
      //BrowserStack code
-    public static final String USERNAME = "loanpalsm_ROytI3";
-    public static final String AUTOMATE_KEY = "qt6Z1G9mq1JXE7SzFGNg";
+    public static final String USERNAME = "*****";
+    public static final String AUTOMATE_KEY = "********";
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-    //
+
 
 
 
@@ -83,7 +62,6 @@ public class TestBase {
             throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
         }
     }
-
 
 
     @BeforeTest
@@ -147,7 +125,6 @@ public class TestBase {
                     URL url = new URL("http://127.0.0.1:4723/wd/hub");
                     driver = new RemoteWebDriver(url,
                             andCaps);
-                    // driver.get("http://url614.cantaloupe.com/ls/click?upn=EjjkrhVv-2Fih3UeS6XUkye-2BxJ5-2F1GyHaMpBCQ7tFCameMdE-2FLQXJ8DKxiY-2FSTbgAm-2FUKOFRuP40OOIgvdcJ3ueEUzfR3orU-2Bdcz6ZxgZDvXfaNv3HOaWF2J2yqwefV5TemRy3AYUv8xn29p6NRjtU-2Fw-3D-3DLHyf_-2B5RXcraW6kUOw6bUo2JlhQ9pJo63EytkOIRLn-2F1bR-2FZQfspglE4Q2sK4DByj9GkvectfxEkR1BEdAJEX1NbDHQzJSYeSjZZR7Vu2UUwoXRTvSJrQ4Yy5YKHQMA6E9scB3Iw4xmmDmU84lEmf40IbW7sjihmb4H-2B29BhHuttDC2TXB3fCeD-2Bwpm3nGeGT2-2Fd9W39x5jpDCGB4T8TjJ4zFzZhXS4t5rAic0BwHLL3guzlmKf3XFpj3uSgQIGKchWEIv-2BDhYmmSLuysnMDyQ1AX9g-3D-3D");
                     driver.get("https://more-qa.mycantaloupe.com");
                     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
                     JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -168,15 +145,11 @@ public class TestBase {
     }
 
 
-
-
-
+    //Method to get a screenshot
     public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException{
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        // after execution, you could see a folder "FailedTestsScreenshots"
-        // under src folder
         String destination = System.getProperty("user.dir") + "/FailedTestsScreenshots/" + screenshotName + dateName
                 + ".png";
         File finalDestination = new File(destination);
